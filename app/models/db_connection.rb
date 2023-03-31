@@ -1,0 +1,16 @@
+class DbConnection < ApplicationRecord
+  def new_attr
+    {
+      id: self.id,
+      user: self.user,
+      display_name: self.display_name,
+      db_port: self.db_port,
+      db_name: self.db_name,
+      db_user: self.db_user,
+      db_pass: self.db_pass,
+      analytics_account_id: self.analytics_account_id,
+      json_file: self.json_file,
+      csv_file: self.csv_file
+    }
+  end
+end
