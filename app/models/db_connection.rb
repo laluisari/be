@@ -1,4 +1,13 @@
 class DbConnection < ApplicationRecord
+  belongs_to :user
+  has_many :dashboards
+
+  validates :display_name, presence: true, length: { minimum: 5, maximum: 100 }
+  validates :db_name, presence: true, length: { minimum: 0, maximum: 256 }
+  validates :db_port, presence: true, numericality: { only_integer: true }
+  validates :db_user, presence: true, length: { minimum: 0, maximum: 256 }
+  validates :db_pass, presence: true, length: { minimum: 0, maximum: 256 }
+
   enum connection_type: {
     mysql: 0,
     postgresql: 1,
