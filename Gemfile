@@ -57,3 +57,4 @@ gem 'pry'
 gem 'mysql2'
 
 gem 'dotenv-rails'
+gem "sassc-rails"
