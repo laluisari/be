@@ -15,6 +15,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_061405) do
   enable_extension "plpgsql"
 
   create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
