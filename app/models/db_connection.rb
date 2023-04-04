@@ -9,7 +9,7 @@ class DbConnection < ApplicationRecord
   def new_attr
     {
       id: self.id,
-      user: self.user,
+      user: self.user_id,
       display_name: self.display_name,
       db_port: self.db_port,
       db_name: self.db_name,
