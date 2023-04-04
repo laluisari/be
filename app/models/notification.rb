@@ -8,9 +8,9 @@ class Notification < ApplicationRecord
     # validates :description, presence: true, length: { maximum: 300 }
 
     enum frequency:{
-        daily: 1,
-        weekly: 2,
-        monthly: 3
+        daily: 0,
+        weekly: 1,
+        monthly: 2
         }
 
 
