@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_03_061304) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_03_061405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "dashboards", force: :cascade do |t|
-    t.string "display_name"
-    t.string "dashboard_type"
-    t.integer "page"
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +42,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_061304) do
     t.integer "user_id"
     t.integer "dashboard_id"
     t.integer "permission"
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

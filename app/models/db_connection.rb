@@ -1,8 +1,15 @@
 class DbConnection < ApplicationRecord
+  enum connection_type: {
+    mysql: 0,
+    postgresql: 1,
+    csv: 2,
+    google_analytic: 3
+  }
+
   def new_attr
     {
       id: self.id,
-      user: self.user,
+      user: self.user_id,
       display_name: self.display_name,
       db_port: self.db_port,
       db_name: self.db_name,
