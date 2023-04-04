@@ -1,15 +1,14 @@
 require_relative "boot"
-
 require "rails/all"
-
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'dotenv/load' if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test' || ENV['RAILS_ENV'] == 'production'
 
 module Dafbin
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+    config.database_password = ENV["DAFBIN_DATABASE_PASSWORD"]
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -28,5 +27,6 @@ module Dafbin
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_dafbin_session"}
+
   end
 end

@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_045940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "data_expert_id", null: false
+    t.bigint "status"
+    t.bigint "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -23,4 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "orders", "users", column: "customer_id", on_delete: :cascade
+  add_foreign_key "orders", "users", column: "data_expert_id", on_delete: :cascade
 end
