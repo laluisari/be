@@ -4,5 +4,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+<<<<<<< Updated upstream
   resources :db_connection
+=======
+  resources :notifications
+  
+>>>>>>> Stashed changes
 end
