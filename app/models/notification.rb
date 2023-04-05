@@ -20,7 +20,7 @@ class Notification < ApplicationRecord
           frequency: self.frequency,
           day: self.day,
           time: self.time,
-          dashboard: self.dashboard,
+          dashboard_id: self.dashboard_id,
           description: self.description,
         }
       end
