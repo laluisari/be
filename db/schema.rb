@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_015008) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_045940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,63 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_015008) do
     t.integer "dashboard_id"
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.text "query"
+    t.integer "visualization_type", default: 0
+    t.bigint "dashboard_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "db_connection_id", null: false
+    t.json "position"
+    t.json "configuration"
+    t.string "card_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
+    t.index ["dashboard_id"], name: "index_cards_on_dashboard_id"
+    t.index ["db_connection_id"], name: "index_cards_on_db_connection_id"
+    t.index ["owner_id"], name: "index_cards_on_owner_id"
+  end
+
+  create_table "dashboards", force: :cascade do |t|
+    t.string "display_name"
+    t.string "dashboard_type"
+    t.integer "page"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "db_connections", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "display_name"
+    t.integer "connection_type"
+    t.integer "db_port"
+    t.string "db_name"
+    t.string "db_user"
+    t.string "db_pass"
+    t.integer "analytics_account_id"
+    t.string "json_file"
+    t.string "csv_file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.bigint "customer_id", null: false
     t.bigint "data_expert_id", null: false
@@ -79,8 +136,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_015008) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "user_dashboards", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "dashboard_id"
+    t.integer "permission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
