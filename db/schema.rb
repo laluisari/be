@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_050011) do
-=======
 ActiveRecord::Schema[7.0].define(version: 2023_04_05_041151) do
->>>>>>> Stashed changes
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_041151) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
 
   create_table "notifications", force: :cascade do |t|
     t.integer "frequency"
@@ -97,10 +94,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_041151) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "cards", "dashboards", on_delete: :cascade
