@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_050011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,11 +25,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
     t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.integer "frequency"
-    t.date "day"
-    t.time "time"
-    t.string "description"
+  create_table "dashboards", force: :cascade do |t|
+    t.string "display_name"
+    t.string "dashboard_type"
+    t.integer "page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,10 +48,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "data_expert_id", null: false
+    t.bigint "status"
+    t.bigint "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
+
   create_table "user_dashboards", force: :cascade do |t|
     t.integer "user_id"
     t.integer "dashboard_id"
     t.integer "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -62,6 +85,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cards", "dashboards", on_delete: :cascade
+  add_foreign_key "cards", "db_connections", on_delete: :cascade
+  add_foreign_key "cards", "users", column: "owner_id", on_delete: :cascade
   add_foreign_key "orders", "users", column: "customer_id", on_delete: :cascade
   add_foreign_key "orders", "users", column: "data_expert_id", on_delete: :cascade
 end
