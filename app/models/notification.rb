@@ -1,11 +1,11 @@
 class Notification < ApplicationRecord
 
-    # belongs_to: dashboard
+    has_one: dashboard
 
-    # validates :frequency, presence: true
-    # validates :day, presence: true
-    # validates :time, presence: true
-    # validates :description, presence: true, length: { maximum: 300 }
+    validates :frequency, presence: true
+    validates :day, presence: true
+    validates :time, presence: true
+    validates :description, presence: true, length: { maximum: 300 }
 
     enum frequency:{
         daily: 0,
