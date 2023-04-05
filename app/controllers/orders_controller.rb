@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params 
-        params.permit(:customer_id, :data_expert_id, :status, :price)
+        params.require(:order).permit(:customer_id, :data_expert_id, :status, :price)
     end
     
 end
