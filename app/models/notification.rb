@@ -5,6 +5,7 @@ class Notification < ApplicationRecord
     validates :frequency, presence: true
     validates :day, presence: true
     validates :time, presence: true
+    validates :dashboard_id, presence: true
     validates :description, presence: true, length: { maximum: 300 }
 
     enum frequency:{
