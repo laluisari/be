@@ -11,14 +11,16 @@ class Card < ApplicationRecord
     validates :query, presence: true
     validates :card_type, presence: true
   
-    validate :valid_owner_role
-  
-    private
-  
-    def valid_owner_role
-      if owner && owner.role != "owner"
-        errors.add(:owner, "must be an owner")
-      end
+    validates :owner_id, presence: :true, on: :create
+
+    validate :owner_id_exists , on: :create
+
+    private 
+
+    def owner_id_exists 
+      errors.add(:owner_id) unless User.exists?(id: owner_id)
     end
+  
+
 
 end

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   }
 
   #relations
-  
+
 
   #validations
   validates :name, presence: true
@@ -28,4 +28,4 @@ class User < ApplicationRecord
         role: self.role
     }
   end
-end 
+end
