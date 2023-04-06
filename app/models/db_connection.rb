@@ -6,6 +6,8 @@ class DbConnection < ApplicationRecord
     google_analytic: 3
   }
 
+  belongs_to :user
+
   def new_attr
     {
       id: self.id,

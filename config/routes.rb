@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :db_connection
   resources :notifications
-  resources :user
+  resources :users
  
 end
