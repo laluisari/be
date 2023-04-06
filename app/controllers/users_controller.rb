@@ -4,12 +4,11 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users.new_attributes, status: :ok
+    render json: @users.map(&:new_attributes), status: :ok
   end
   
   def show
-    
-    render json: {message: "success", data: @user.new_attributes}, status: :ok
+    render json: { message: "success", data: @user.new_attributes }, status: :ok
   end
 
   def create
@@ -41,10 +40,10 @@ class UsersController < ApplicationController
   def find_user_id
     @user = User.find_by_id(params[:id])
 
-    render json: { message: "user_id not found" }, status: not_found if @user.nil?
+    render json: { message: "user_id not found" }, status: :not_found if @user.nil?
   end
 
   def user_params
-    params.permit(:name, :email, :password, :role)
+    params.permit(:name, :email, :password, :password_confirmation, :role)
   end
 end

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   #validations
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6}, if: -> { new_record? || !password.nil? }
+  validates :password, presence: true, length: {minimum: 6}, if: -> { new_record? || !password.nil? }
   validates :role, presence: true
 
   #bcrypt to encrypt password
@@ -24,7 +24,7 @@ class User < ApplicationRecord
         id: self.id,
         name: self.name,
         email: self.email,
-        password: self.password,
+        password_digest: self.password_digest,
         role: self.role
     }
   end

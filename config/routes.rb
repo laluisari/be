@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 <<<<<<< Updated upstream
   resources :db_connection
+  resources :notifications
+  resources :user
+
 end
