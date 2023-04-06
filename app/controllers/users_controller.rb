@@ -1,5 +1,20 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_request, only: %i[create login]
   before_action :find_user_id, only: [:show, :update, :destroy]
+
+  def login
+    @user = User.find_by(email: params[:email])
+    # return render json: @user
+    if @user&.authenticate(params[:password])
+      token = JsonWebToken.encode(user_id: @user.id)
+      render json: {
+        user: @user.new_attributes,
+        token: token
+      }
+    else
+      render json: { error: "Invalid username or password" }, status: :unauthorized
+    end
+  end
 
   def index
     @users = User.all
