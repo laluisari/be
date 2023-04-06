@@ -24,15 +24,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /notifications/1
-  def update
-    if @notification.update(notification_params)
-      render json: @notification.new_attr
-    else
-      render json: @notification.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /notifications/1
   def destroy
     @notification = Notification.find(params[:id])
