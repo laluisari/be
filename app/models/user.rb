@@ -10,13 +10,13 @@ class User < ApplicationRecord
   has_many :db_connections
   has_many :user_dashboards
   has_many :dashboards, through: :user_dashboards
-  # has_many :card
+  has_many :cards, foreign_key: :owner_id
   # has_many :order 
 
   #validations
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: {minimum: 6}, if: -> { new_record? || !password.nil? }
+  validates :password_digest, presence: true, length: {minimum: 6}, if: -> { new_record? || !password.nil? }
   validates :role, presence: true
 
   #bcrypt to encrypt password
