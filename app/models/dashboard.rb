@@ -1,5 +1,5 @@
 class Dashboard < ApplicationRecord
-  belongs_to :notification
+  has_one :notification
   has_many :user_dashboard
   has_many :card
   has_many :user_dashboards
