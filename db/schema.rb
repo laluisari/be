@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_093545) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.bigint "phone_number"
+    t.string "occupation"
   end
 
   add_foreign_key "cards", "dashboards", on_delete: :cascade

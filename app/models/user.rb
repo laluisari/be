@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :user_dashboards
   has_many :dashboards, through: :user_dashboards
   has_many :cards, foreign_key: :owner_id
-  has_many :orders, foreign_key: :customer_id  #check order model
-  has_many :orders, foreign_key: :data_expert_id  #check order model
+  has_many :orders, foreign_key: :customer_id  
+  has_many :orders, foreign_key: :data_expert_id  
 
   #validations
   validates :name, presence: true
@@ -30,7 +30,9 @@ class User < ApplicationRecord
         name: self.name,
         email: self.email,
         password_digest: self.password_digest,
-        role: self.role
+        role: self.role,
+        phone_number: self.phone_number,
+        occupation: self.occupation
     }
   end
 end
