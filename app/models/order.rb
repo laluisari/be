@@ -6,8 +6,8 @@ class Order < ApplicationRecord
     validates :data_expert, presence: true
     validates :status, presence: true
     validates :price, presence: true
-    validates :valid_customer_role
-    validates :valid_data_expert_role
+    validate :valid_customer_role
+    validate :valid_data_expert_role
 
     private 
 
