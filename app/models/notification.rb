@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
 
-    has_one: dashboard
+    has_one :dashboard
 
     validates :frequency, presence: true
     validates :day, presence: true
