@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :db_connection
   resources :notifications
-  resources :user
+  resources :users
+  post '/register', to: 'users#create'
+  post '/login', to: 'users#login'
 end
