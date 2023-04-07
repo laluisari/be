@@ -5,7 +5,7 @@ class CreateDbConnections < ActiveRecord::Migration[7.0]
       t.string :display_name
       t.integer :connection_type
       t.integer :db_port
-      t.string :db_name
+      t.string :db_name 
       t.string :db_user
       t.string :db_pass
       t.integer :analytics_account_id

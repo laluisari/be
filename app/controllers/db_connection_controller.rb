@@ -45,3 +45,4 @@ class DbConnectionController < ApplicationController
     return render json: { message: 'record not found' }, status: :not_found if @db.nil?
   end
 end
+ 

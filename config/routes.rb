@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   resources :db_connection
   resources :notifications
   resources :users
+  resources :orders
+  resources :cards
  
 end
