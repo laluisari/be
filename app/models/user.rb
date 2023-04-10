@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_create :confirmation_token
+
   #roles
   enum role: {
     admin: 0,
@@ -11,8 +13,8 @@ class User < ApplicationRecord
   has_many :user_dashboards
   has_many :dashboards, through: :user_dashboards
   has_many :cards, foreign_key: :owner_id
-  has_many :orders, foreign_key: :customer_id  
-  has_many :orders, foreign_key: :data_expert_id  
+  has_many :orders, foreign_key: :customer_id
+  has_many :orders, foreign_key: :data_expert_id
 
   #validations
   validates :name, presence: true
@@ -34,5 +36,19 @@ class User < ApplicationRecord
         phone_number: self.phone_number,
         occupation: self.occupation
     }
+  end
+
+  #registration with email confirmation
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
+  private
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
   end
 end

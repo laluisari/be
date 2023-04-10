@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
 
     if @user.valid?
+      UserMailer.registration_confirmation(@user).deliver_now
       render json: { message: "success", data: @user }, status: :created
     else
       render json: { message: @user.errors.full_messages }, status: :unprocessable_entity
@@ -35,6 +36,16 @@ class UsersController < ApplicationController
     render json: { message: "success", data: @user.destroy }, status: :ok
   end
 
+  def confirm_email
+    user = User.find_by_confirm_token(params[:id])
+    if user
+      user.email_activate
+      render json: "Email Terverifikasi"
+    else
+      render json: { errors: "Email gagal diverifikasi" }, status: :bad_request
+    end
+  end
+
   private
 
   def find_user_id
@@ -44,6 +55,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :password_confirmation, :role, :phone_number, :occupation)
+    params.require(:user).permit(
+      :name, :email, :password, :password_confirmation, :role, :phone_number, :occupation
+    )
   end
 end
