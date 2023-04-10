@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => "/admin", :as => "rails_admin"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
   post '/register', to: 'users#create'
   post '/login', to: 'users#login'
+  get "db", to: "db_connection#db"
+  get "/auth/current_user", to: "users#active_user"
 end
