@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   skip_before_action :authenticate_request, only: %i[create login]
   before_action :find_user_id, only: [:show, :update, :destroy]
 
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
 
     render json: @users.map(&:new_attributes), status: :ok
   end
-
+  
   def show
     render json: { message: "success", data: @user.new_attributes }, status: :ok
   end

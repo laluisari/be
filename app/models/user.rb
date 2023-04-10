@@ -13,8 +13,8 @@ class User < ApplicationRecord
   has_many :user_dashboards
   has_many :dashboards, through: :user_dashboards
   has_many :cards, foreign_key: :owner_id
-  has_many :orders, foreign_key: :customer_id
-  has_many :orders, foreign_key: :data_expert_id
+  has_many :orders, foreign_key: :customer_id  
+  has_many :orders, foreign_key: :data_expert_id  
 
   #validations
   validates :name, presence: true

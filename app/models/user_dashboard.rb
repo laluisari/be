@@ -10,6 +10,7 @@ class UserDashboard < ApplicationRecord
   validates :user_id, presence: true
   validates :dashboard_id, presence: true
   validates :permission, presence: true
+
   def new_attr
     {
       user_id: self.user_id,

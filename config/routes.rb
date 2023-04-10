@@ -11,11 +11,8 @@ Rails.application.routes.draw do
   resources :db_connection
   resources :notifications
   resources :users
-  post '/register', to: 'users#create'
-  post '/login', to: 'users#login'
   resources :orders
   resources :cards
-
 
 
   post '/register', to: 'users#create'
