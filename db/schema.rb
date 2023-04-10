@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_045940) do
     t.string "csv_file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "db_host"
   end
 
   create_table "notifications", force: :cascade do |t|
