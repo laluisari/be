@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[create login]
   before_action :find_user_id, only: [:show, :update, :destroy]
 
+  def active_user
+    render json: @current_user.new_attributes, status: :ok
+  end
+
   def login
     @user = User.find_by(email: params[:email])
     # return render json: @user
