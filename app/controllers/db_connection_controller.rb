@@ -1,4 +1,6 @@
 class DbConnectionController < ApplicationController
+  include DbConnect
+
   before_action :set_db_connection, only: %i[show update destroy]
 
   def index
@@ -31,6 +33,15 @@ class DbConnectionController < ApplicationController
       return
     end
     render json: @db, status: :ok
+  end
+
+  def db
+    @db = DbConnection.find_by_id(2)
+    @data = DbConnect::GetColumns('user', @db)
+    # binding.pry
+    return render json: { message: 'Connection Failed' }, status: :not_found if @data.nil?
+
+    render json: @data, status: :ok
   end
 
   private

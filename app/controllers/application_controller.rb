@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include JsonWebToken
-  
+  include DbConnect
+
   before_action :authenticate_request
   # before_action :db_connect
 
