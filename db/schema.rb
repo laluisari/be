@@ -10,19 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_050011) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_10_075515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.bigint "data_expert_id", null: false
-    t.bigint "status"
-    t.bigint "price"
+  create_table "cards", force: :cascade do |t|
+    t.text "query"
+    t.integer "visualization_type", default: 0
+    t.bigint "dashboard_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "db_connection_id", null: false
+    t.json "position"
+    t.json "configuration"
+    t.string "card_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+    t.index ["dashboard_id"], name: "index_cards_on_dashboard_id"
+    t.index ["db_connection_id"], name: "index_cards_on_db_connection_id"
+    t.index ["owner_id"], name: "index_cards_on_owner_id"
   end
 
   create_table "dashboards", force: :cascade do |t|
@@ -46,6 +51,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_050011) do
     t.string "csv_file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "db_host"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "dashboard_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "data_expert_id", null: false
+    t.bigint "status"
+    t.bigint "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -84,6 +111,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_050011) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.bigint "phone_number"
+    t.string "occupation"
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
+    t.string "reset_token"
+    t.datetime "reset_sent_at"
   end
 
   add_foreign_key "cards", "dashboards", on_delete: :cascade

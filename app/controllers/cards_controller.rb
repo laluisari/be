@@ -4,7 +4,7 @@ class CardsController < ApplicationController
     def index 
         @cards = Card.all()
         render json: @cards, status: :ok
-    end
+    end 
 
     def create 
         @query = Card.new(card_params)
