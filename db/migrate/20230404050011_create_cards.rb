@@ -9,7 +9,7 @@ class CreateCards < ActiveRecord::Migration[7.0]
       t.json :position
       t.json :configuration
       t.string :card_type 
- 
+
       t.timestamps
     end
   end

@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   get '/confirm/:id', to: 'users#confirm_email'
 
   # root "articles#index"
+
   resources :db_connection
   resources :notifications
+  resources :user
+  resources :user_dashboard
   resources :users
   resources :orders
   resources :cards
