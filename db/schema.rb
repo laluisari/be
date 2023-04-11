@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_075515) do
     t.string "card_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "frequency"
+    t.date "day"
+    t.time "time"
+    t.string "description"
     t.index ["dashboard_id"], name: "index_cards_on_dashboard_id"
     t.index ["db_connection_id"], name: "index_cards_on_db_connection_id"
     t.index ["owner_id"], name: "index_cards_on_owner_id"
@@ -72,6 +81,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_075515) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["data_expert_id"], name: "index_orders_on_data_expert_id"
+  end
+
+  create_table "user_dashboards", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "dashboard_id"
+    t.integer "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_dashboards", force: :cascade do |t|

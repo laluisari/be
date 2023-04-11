@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   before_create :confirmation_token
-  
+
   #roles
   enum role: {
     admin: 0,
@@ -59,6 +59,10 @@ class User < ApplicationRecord
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
   end
+<<<<<<< HEAD
 
   
 end 
+=======
+end
+>>>>>>> 28512b0f02f5eb69fd21dbca12a8093444acc83a
