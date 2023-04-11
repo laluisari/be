@@ -10,7 +10,9 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    @current_user = JsonWebToken::AuthorizeApiRequest(request.headers)
-    render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+    @current_user = JsonWebToken.AuthorizeApiRequest(request.headers)
+    puts @current_user
+    puts request.headers['Authorization']
+    render json: { error: "Not Authorized" }, status: 401 unless @current_user
   end
 end
