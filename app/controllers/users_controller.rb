@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-
   skip_before_action :authenticate_request, only: %i[create login]
-  before_action :find_user_id, only: [:show, :update, :destroy]
+  before_action :find_user_id, only: %i[show update destroy]
 
   def active_user
     render json: @current_user.new_attributes, status: :ok
@@ -12,12 +11,12 @@ class UsersController < ApplicationController
     # return render json: @user
     if @user&.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: @user.id)
-      render json: {
-        user: @user.new_attributes,
-        token: token
-      }
+      render json: { user: @user.new_attributes, token: token }
     else
-      render json: { error: "Invalid username or password" }, status: :unauthorized
+      render json: {
+               error: "Invalid username or password"
+             },
+             status: :unauthorized
     end
   end
 
@@ -26,7 +25,7 @@ class UsersController < ApplicationController
 
     render json: @users.map(&:new_attributes), status: :ok
   end
-  
+
   def show
     render json: { message: "success", data: @user.new_attributes }, status: :ok
   end
@@ -38,16 +37,22 @@ class UsersController < ApplicationController
       UserMailer.registration_confirmation(@user).deliver_now
       render json: { message: "success", data: @user }, status: :created
     else
-      render json: { message: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: {
+               message: @user.errors.full_messages
+             },
+             status: :unprocessable_entity
     end
   end
 
-  def update 
+  def update
     if @user.update(user_params)
       render json: @user, status: :ok
     else
-      render json: { message: @user.errors.full_messages }, status: :unprocessable_entity
-    end 
+      render json: {
+               message: @user.errors.full_messages
+             },
+             status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -66,30 +71,44 @@ class UsersController < ApplicationController
     end
   end
 
-  def forgot_password 
+  def forgot_password
     user = User.find_by(email: params[:email])
     if user.present?
       user.generate_reset_token
       UserMailer.forgot_password(user).deliver_now
-      render json: { status: 'SUCCESS', message: 'Password reset email sent' }, status: :ok
-    else 
-      render json: { status: 'ERROR', message: 'Email not found' }, status: :unprocessable_entity
+      render json: {
+               status: "SUCCESS",
+               message: "Password reset email sent"
+             },
+             status: :ok
+    else
+      render json: {
+               status: "ERROR",
+               message: "Email not found"
+             },
+             status: :unprocessable_entity
     end
-  end 
-
+  end
 
   private
 
   def find_user_id
     @user = User.find_by_id(params[:id])
 
-    render json: { message: "user_id not found" }, status: :not_found if @user.nil?
+    if @user.nil?
+      render json: { message: "user_id not found" }, status: :not_found
+    end
   end
 
   def user_params
     params.require(:user).permit(
-      :name, :email, :password, :password_confirmation, :role, :phone_number, :occupation
+      :name,
+      :email,
+      :password,
+      :password_confirmation,
+      :role,
+      :phone_number,
+      :occupation
     )
   end
-  
 end
