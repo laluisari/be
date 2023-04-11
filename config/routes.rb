@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :db_connection
+  resources :dashboards
   resources :notifications
   resources :user
   resources :user_dashboard
@@ -23,10 +24,6 @@ Rails.application.routes.draw do
   patch '/reset_password/:token', to: 'password_resets#update'
   post '/register', to: 'users#create'
   post '/login', to: 'users#login'
-  get "db", to: "db_connection#db"
-  get "/auth/current_user", to: "users#active_user"
-
-
-
-
+  get 'db', to: 'db_connection#db'
+  get '/auth/current_user', to: 'users#active_user'
 end
