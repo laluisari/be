@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   post 'forgot_password', to: 'users#forgot_password'
   get '/reset_password/:token', to: 'password_resets#edit'
   patch '/reset_password/:token', to: 'password_resets#update'
+  post '/register', to: 'users#create'
+  post '/login', to: 'users#login'
+  get "db", to: "db_connection#db"
+  get "/auth/current_user", to: "users#active_user"
 
 
 
- 
+
 end
