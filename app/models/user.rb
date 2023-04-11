@@ -4,8 +4,8 @@ class User < ApplicationRecord
   #roles
   enum role: {
     admin: 0,
-    customer: 1, 
-    data_expert: 2  
+    customer: 1,
+    data_expert: 2
   }
 
   #relations
@@ -13,8 +13,8 @@ class User < ApplicationRecord
   has_many :user_dashboards
   has_many :dashboards, through: :user_dashboards
   has_many :cards, foreign_key: :owner_id
-  has_many :orders, foreign_key: :customer_id  
-  has_many :orders, foreign_key: :data_expert_id  
+  has_many :orders, foreign_key: :customer_id
+  has_many :orders, foreign_key: :data_expert_id
 
   #validations
   validates :name, presence: true
@@ -31,7 +31,7 @@ class User < ApplicationRecord
         id: self.id,
         name: self.name,
         email: self.email,
-        password_digest: self.password_digest, 
+        password_digest: self.password_digest,
         role: self.role,
         phone_number: self.phone_number,
         occupation: self.occupation
@@ -46,11 +46,11 @@ class User < ApplicationRecord
   end
 
   #set_token
-  
-  def generate_reset_token 
+
+  def generate_reset_token
     self.reset_token = SecureRandom.hex(10)
-    self.reset_sent_at = Time.now.utc 
-    save! 
+    self.reset_sent_at = Time.now.utc
+    save!
   end
 
   private
@@ -60,6 +60,5 @@ class User < ApplicationRecord
     end
   end
 
-  
-end 
 
+end
