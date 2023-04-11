@@ -22,12 +22,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def update 
     if @user.update(user_params)
       render json: @user, status: :ok
     else
       render json: { message: @user.errors.full_messages }, status: :unprocessable_entity
-    end
+    end 
   end
 
   def destroy
@@ -46,6 +46,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def forgot_password 
+    user = User.find_by(email: params[:email])
+    if user.present?
+      user.generate_reset_token
+      UserMailer.forgot_password(user).deliver_now
+      render json: { status: 'SUCCESS', message: 'Password reset email sent' }, status: :ok
+    else 
+      render json: { status: 'ERROR', message: 'Email not found' }, status: :unprocessable_entity
+    end
+  end 
+
+
   private
 
   def find_user_id
@@ -59,4 +71,5 @@ class UsersController < ApplicationController
       :name, :email, :password, :password_confirmation, :role, :phone_number, :occupation
     )
   end
+  
 end

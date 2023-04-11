@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   resources :orders
   resources :cards
 
-  
+  # root forgot password
+  post 'forgot_password', to: 'users#forgot_password'
+  get '/reset_password/:token', to: 'password_resets#edit'
+  patch '/reset_password/:token', to: 'password_resets#update'
+
+
+
  
 end

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   #roles
   enum role: {
     admin: 0,
-    customer: 1,
+    customer: 1, 
     data_expert: 2  
   }
 
@@ -31,7 +31,7 @@ class User < ApplicationRecord
         id: self.id,
         name: self.name,
         email: self.email,
-        password_digest: self.password_digest,
+        password_digest: self.password_digest, 
         role: self.role,
         phone_number: self.phone_number,
         occupation: self.occupation
@@ -45,10 +45,20 @@ class User < ApplicationRecord
     save!(:validate => false)
   end
 
+  #set_token
+  
+  def generate_reset_token 
+    self.reset_token = SecureRandom.hex(10)
+    self.reset_sent_at = Time.now.utc 
+    save! 
+  end
+
   private
   def confirmation_token
     if self.confirm_token.blank?
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
   end
+
+  
 end 
