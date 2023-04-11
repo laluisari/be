@@ -4,4 +4,4 @@ Thanks for registering! To confirm your registration click the URL below.
 
 
 
-<%= link_to "Verifikasi Email", "http://127.0.0.1:3000/confirm/#{@user.confirm_token}" %>
+<%= link_to "Verifikasi Email", "#{@base_url}/confirm/#{@user.confirm_token}" %>
