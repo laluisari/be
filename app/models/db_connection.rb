@@ -22,6 +22,7 @@ class DbConnection < ApplicationRecord
       id: self.id,
       user: self.user_id,
       display_name: self.display_name,
+      db_host: self.db_host,
       db_port: self.db_port,
       db_name: self.db_name,
       db_user: self.db_user,
