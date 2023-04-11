@@ -53,7 +53,6 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -63,15 +62,20 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'localhost:3000',
-    user_name:            'aramadhan395@gmail.com',
-    password:             'pujspegfjocifnjb',
-    authentication:       'plain',
-    enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5 }
+  # config.action_mailer.default_url_options = { host: "dafbin-staging.fly.dev" }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.gmail.com",
+  #   port: 587,
+  #   # domain:               'localhost:3000',
+  #   domain: "dafbin-staging.fly.dev",
+  #   # user_name:            'aramadhan395@gmail.com',
+  #   user_name: "dafbin.qatros@gmail.com",
+  #   # password:             'pujspegfjocifnjb',
+  #   password: "vxmqlztxgvtoawxl",
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   open_timeout: 5,
+  #   read_timeout: 5
+  # }
 end
