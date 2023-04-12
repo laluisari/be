@@ -18,8 +18,8 @@ class User < ApplicationRecord
 
   #validations
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password_digest, presence: true, length: {minimum: 6}, if: -> { new_record? || !password.nil? }
+  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validate  :password_requirements
   validates :role, presence: true
 
   #bcrypt to encrypt password
@@ -31,8 +31,6 @@ class User < ApplicationRecord
         id: self.id,
         name: self.name,
         email: self.email,
-        password_digest: self.password_digest,
-        role: self.role,
         phone_number: self.phone_number,
         occupation: self.occupation
     }
@@ -60,5 +58,19 @@ class User < ApplicationRecord
     end
   end
 
+  #validation for password
+  def password_requirements
+    rules = {
+      "must contain at least 8 characters"                    => /.{8,}/,
+      "must contain at least one lowercase letter"            => /[a-z]+/,
+      "must contain at least one uppercase letter"            => /[A-Z]+/,
+      "must contain at least one digit"                       => /\d+/,
+      "must contain at least one special character or symbol" => /[^A-Za-z0-9]+/
+    }
+  
+    rules.each do |message, regex|
+      errors.add( :password_digest, message ) unless password.match( regex )
+    end
+  end
 
 end
