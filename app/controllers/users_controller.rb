@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       UserMailer.registration_confirmation(@user).deliver_now
-      render json: { message: "success", data: @user }, status: :created
+      render json: { message: "success", data: @user.new_attributes}, status: :created
     else
       render json: {
                message: @user.errors.full_messages
@@ -56,9 +56,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-
-    render json: { message: "success", data: @user.destroy }, status: :ok
+    if @user.destroy
+      render json: { message: "success", data: @user }, status: :ok
+    else
+      render json: { message: "Delete Failed" }, status: :unprocessable_entity
+    end
   end
 
   def confirm_email
