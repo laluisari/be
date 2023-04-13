@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_075515) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_030746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_075515) do
     t.string "confirm_token"
     t.string "reset_token"
     t.datetime "reset_sent_at"
+    t.boolean "accept_policy", default: false
   end
 
   add_foreign_key "cards", "dashboards", on_delete: :cascade
