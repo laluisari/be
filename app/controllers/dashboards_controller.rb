@@ -4,18 +4,18 @@ class DashboardsController < ApplicationController
   def index
     @dashboards = Dashboard.all
 
-    render json: @dashboards.map(&:new_attr), status: ok
+    render json: @dashboards.map(&:new_attr), status: :ok
   end
 
   def show
-    render json: @dashboard.new_att, status: :ok
+    render json: @dashboard.new_attr, status: :ok
   end
 
   def create
-    @dashboards = Dashboard.new(dashboard_params)
+    @dashboard = Dashboard.new(dashboard_params)
     return render json: { message: 'Failed'}, status: :unprocessable_entity unless @dashboard.save
 
-    render json: @dashboard.map(&:new_attr), status: :ok
+    render json: @dashboard.new_attr, status: :ok
   end
 
   def update
