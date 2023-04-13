@@ -8,7 +8,7 @@ class Dashboard < ApplicationRecord
   validates :display_name, presence: true, length: {maximum:50}
   validates :dashboard_type, presence: true
   validates :page, presence: true
-  validates :thumbnail, presence: true
+  # validates :thumbnail, presence: true
   validates :db_connection_id, presence: true
 
   def new_attr
@@ -17,7 +17,7 @@ class Dashboard < ApplicationRecord
       display_name: self.display_name,
       dashboard_type: self.dashboard_type,
       page: self.page,
-      thumbnail: self.thumbnail,
+      # thumbnail: self&.thumbnail,
       db_connection_id: self.db_connection_id
 
     }
