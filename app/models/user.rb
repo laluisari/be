@@ -18,9 +18,10 @@ class User < ApplicationRecord
 
   #validations
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate  :password_requirements
   validates :role, presence: true
+  validates :accept_policy, presence: true
 
   #bcrypt to encrypt password
   has_secure_password
