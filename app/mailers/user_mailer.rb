@@ -14,6 +14,7 @@ class UserMailer < ApplicationMailer
 
   def forgot_password(user)
     @user = user
+    @base_url = ENV['BASE_URL']
     mail to: user.email, subject: "Reset your password"
   end
 
