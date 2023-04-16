@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[create login]
+  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password]
   before_action :find_user_id, only: %i[show update destroy]
 
   def active_user

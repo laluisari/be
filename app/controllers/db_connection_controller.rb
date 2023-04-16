@@ -1,6 +1,8 @@
 class DbConnectionController < ApplicationController
   include DbConnect
 
+  before_action :authenticate_request
+
   before_action :set_db_connection, only: %i[show update destroy]
 
   def index
