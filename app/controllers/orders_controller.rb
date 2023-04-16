@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
     before_action :order_id, only: [:show, :update, :destroy]
+    skip_before_action :authenticate_request
 
     def index 
         @orders = Order.all 

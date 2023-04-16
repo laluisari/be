@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-
     render json: @users.map(&:new_attributes), status: :ok
   end
 
@@ -32,7 +31,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-
     if @user.valid?
       UserMailer.registration_confirmation(@user).deliver_now
       render json: { message: "success", data: @user.new_attributes}, status: :created
@@ -96,7 +94,6 @@ class UsersController < ApplicationController
 
   def find_user_id
     @user = User.find_by_id(params[:id])
-
     if @user.nil?
       render json: { message: "user_id not found" }, status: :not_found
     end
