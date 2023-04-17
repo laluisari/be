@@ -11,12 +11,13 @@ class UsersController < ApplicationController
     # return render json: @user
     if @user&.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: @user.id)
-      render json: { user: @user.new_attributes, token: token }
+      render json: { status: 200, message: 'success', user: @user.new_attributes, token: token }, status: :ok
     else
       render json: {
-               error: "Invalid username or password"
-             },
-             status: :unauthorized
+        status: 401,
+        message: 'Login Failed',
+        error: 'Invalid username or password'
+      }, status: :unauthorized
     end
   end
 
