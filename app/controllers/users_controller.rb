@@ -109,7 +109,8 @@ class UsersController < ApplicationController
       :accept_policy,
       :role,
       :phone_number,
-      :occupation
+      :occupation,
+      :avatar
     )
   end
 end
