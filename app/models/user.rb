@@ -26,6 +26,9 @@ class User < ApplicationRecord
   #bcrypt to encrypt password
   has_secure_password
 
+  #uploader cloudinary
+  mount_uploader :avatar, AvatarUploader
+
   #new_attributes
   def new_attributes
     {
@@ -33,7 +36,8 @@ class User < ApplicationRecord
         name: self.name,
         email: self.email,
         phone_number: self.phone_number,
-        occupation: self.occupation
+        occupation: self.occupation,
+        avatar: self.avatar
     }
   end
 

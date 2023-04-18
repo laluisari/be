@@ -60,3 +60,7 @@ gem 'pry'
 gem 'mysql2'
 
 gem "sassc-rails"
+
+gem 'cloudinary'
+
+gem 'carrierwave'
