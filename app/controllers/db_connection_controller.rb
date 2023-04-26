@@ -48,9 +48,26 @@ class DbConnectionController < ApplicationController
     }, status: :ok
   end
 
+  def connection_check
+    @db = DbConnection.new(db_connection_params)
+    @check = DbConnect::InitConnection(@db)
+    if @check.nil?
+      render json:
+      {
+        status: 400,
+        message: 'Connection Failed',
+        error: 'Please Check your Configuration'
+      }, status: :bad_request
+      return
+    end
+    render json: { status: 200, message: 'Success' }, status: :ok
+  end
+
   def db
-    @db = DbConnection.find_by_id(2)
-    @data = DbConnect::GetColumns('user', @db)
+    @db = DbConnection.find_by_id(9)
+    # binding.pry
+    # @data = DbConnect::GetColumns('user', @db)
+    @data = DbConnect::GetTables(@db)
     return render json: { message: 'Connection Failed' }, status: :not_found if @data.nil?
 
     render json: { status: 200, message: 'Success', data: @data }, status: :ok
