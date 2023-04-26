@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :cards
 
+  # route for check db connection
+  post '/db_connection/db_check', to: 'db_connection#connection_check'
+
   # root forgot password
   post 'forgot_password', to: 'users#forgot_password'
   get '/reset_password/:token', to: 'password_resets#edit'
