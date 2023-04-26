@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password]
+  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password ]
   before_action :find_user_id, only: %i[show update destroy]
 
   def active_user
@@ -44,6 +44,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.skip_password_validation = true
     if @user.update(user_params)
       render json: @user, status: :ok
     else
@@ -113,4 +114,5 @@ class UsersController < ApplicationController
       :avatar
     )
   end
+
 end
