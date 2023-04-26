@@ -41,7 +41,8 @@ class User < ApplicationRecord
         phone_number: self.phone_number,
         occupation: self.occupation,
         avatar: self.avatar,
-        role: self.role
+        role: self.role,
+        email_confirmed: self.email_confirmed
     }
   end
 
