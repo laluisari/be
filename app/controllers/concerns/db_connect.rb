@@ -21,7 +21,7 @@ module DbConnect
 
     case db_param.connection_type
     when 'mysql'
-      result = conn.query("SELECT * FROM information_schema.tables WHERE TABLE_TYPE = 'BASE TABLE'")
+      result = conn.query("SELECT TABLE_NAME, TABLE_ROWS FROM information_schema.tables WHERE TABLE_TYPE = 'BASE TABLE'")
       conn.close
       result
     when 'postgresql'
