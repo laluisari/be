@@ -19,9 +19,12 @@ class User < ApplicationRecord
   #validations
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validate  :password_requirements
+  validate  :password_requirements, unless: :skip_password_validation
   validates :role, presence: true
   validates :accept_policy, presence: true
+
+  #attr_accessor
+  attr_accessor :skip_password_validation
 
   #bcrypt to encrypt password
   has_secure_password
