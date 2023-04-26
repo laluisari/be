@@ -63,3 +63,5 @@ gem "sassc-rails"
 gem 'cloudinary'
 
 gem 'carrierwave'
+
+gem 'cancancan'
