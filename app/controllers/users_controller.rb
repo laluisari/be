@@ -115,11 +115,4 @@ class UsersController < ApplicationController
     )
   end
 
-  def update_user_params
-    params.require(:user).permit(
-      :phone_number,
-      :occupation
-    )
-  end
-
 end
