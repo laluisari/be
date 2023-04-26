@@ -37,7 +37,8 @@ class User < ApplicationRecord
         email: self.email,
         phone_number: self.phone_number,
         occupation: self.occupation,
-        avatar: self.avatar
+        avatar: self.avatar,
+        role: self.role
     }
   end
 
@@ -72,7 +73,7 @@ class User < ApplicationRecord
       "must contain at least one digit"                       => /\d+/,
       "must contain at least one special character or symbol" => /[^A-Za-z0-9]+/
     }
-  
+
     rules.each do |message, regex|
       errors.add( :password_digest, message ) unless password.match( regex )
     end
