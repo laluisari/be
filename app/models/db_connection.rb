@@ -20,7 +20,7 @@ class DbConnection < ApplicationRecord
   def new_attr
     {
       id: self.id,
-      user: self.user_id,
+      user: self.user&.new_attributes,
       display_name: self.display_name,
       db_host: self.db_host,
       db_port: self.db_port,
