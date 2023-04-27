@@ -67,7 +67,9 @@ class UsersController < ApplicationController
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
+      #tambah view untuk success_confirmation (kasih button untuk redirect ke login page)
       render json: "Email Terverifikasi"
+      # redirect_to ...
     else
       render json: { errors: "Email gagal diverifikasi" }, status: :bad_request
     end
