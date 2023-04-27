@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# roo read file csv
+gem 'roo'
+
 gem 'dotenv-rails', groups: [:development, :test, :production]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
