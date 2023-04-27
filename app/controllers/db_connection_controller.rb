@@ -50,8 +50,8 @@ class DbConnectionController < ApplicationController
 
   def connection_check
     @db = DbConnection.new(db_connection_params)
-    @check = DbConnect::InitConnection(@db)
-    if @check.nil?
+    @tables = DbConnect::GetTables(@db)
+    if @tables.nil?
       render json:
       {
         status: 400,
@@ -60,7 +60,7 @@ class DbConnectionController < ApplicationController
       }, status: :bad_request
       return
     end
-    render json: { status: 200, message: 'Success' }, status: :ok
+    render json: { status: 200, message: 'Connection Success', data: @tables }, status: :ok
   end
 
   def db
