@@ -1,4 +1,5 @@
 class DbConnection < ApplicationRecord
+
   belongs_to :user
   has_many :dashboards
 
@@ -16,6 +17,9 @@ class DbConnection < ApplicationRecord
   }
 
   belongs_to :user
+
+  #upload csv
+  mount_uploader :csv_file, CsvUploader
 
   def new_attr
     {
