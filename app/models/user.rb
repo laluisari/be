@@ -1,11 +1,16 @@
 class User < ApplicationRecord
   before_create :confirmation_token
 
-  #roles
+  #enum roles and genders
   enum role: {
     admin: 0,
     customer: 1,
     data_expert: 2
+  }
+
+  enum gender: {
+    laki_laki: 0,
+    perempuan: 1 
   }
 
   #relations
@@ -38,6 +43,8 @@ class User < ApplicationRecord
         id: self.id,
         name: self.name,
         email: self.email,
+        gender: self.gender,
+        birthdate: self.birthdate,
         phone_number: self.phone_number,
         occupation: self.occupation,
         avatar: self.avatar,

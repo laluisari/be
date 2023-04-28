@@ -110,6 +110,8 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :accept_policy,
+      :gender,
+      :birthdate,
       :role,
       :phone_number,
       :occupation,
