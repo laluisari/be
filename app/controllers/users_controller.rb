@@ -103,8 +103,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:user).permit(
+  def user_params {
+    # params.require(:user).permit(
       :name,
       :email,
       :password,
@@ -116,7 +116,8 @@ class UsersController < ApplicationController
       :phone_number,
       :occupation,
       :avatar
-    )
+    # )
+  }
   end
 
 end
