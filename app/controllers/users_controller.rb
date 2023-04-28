@@ -103,21 +103,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_params {
-    # params.require(:user).permit(
-      :name,
-      :email,
-      :password,
-      :password_confirmation,
-      :accept_policy,
-      :gender,
-      :birthdate,
-      :role,
-      :phone_number,
-      :occupation,
-      :avatar
-    # )
-  }
+  def user_params 
+    {
+      name:params[:name],
+      email:params[:email],
+      password:params[:password],
+      password_confirmation:params[:password_confirmation],
+      accept_policy:params[:accept_policy],
+      gender:params[:gender],
+      birthdate:params[:birthdate],
+      role:params[:role],
+      phone_number:params[:phone_number],
+      occupation:params[:occupation],
+      avatar:params[:avatar]
+    }
   end
-
 end
