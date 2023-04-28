@@ -111,7 +111,6 @@ class UsersController < ApplicationController
       password_confirmation:params[:password_confirmation],
       accept_policy:params[:accept_policy],
       gender:params[:gender],
-      birthdate:params[:birthdate],
       role:params[:role],
       phone_number:params[:phone_number],
       occupation:params[:occupation],
