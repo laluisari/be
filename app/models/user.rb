@@ -44,7 +44,6 @@ class User < ApplicationRecord
         name: self.name,
         email: self.email,
         gender: self.gender,
-        birthdate: self.birthdate,
         phone_number: self.phone_number,
         occupation: self.occupation,
         avatar: self.avatar,
