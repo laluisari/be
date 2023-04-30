@@ -104,17 +104,6 @@ class UsersController < ApplicationController
   end
 
   def user_params 
-    {
-      name:params[:name],
-      email:params[:email],
-      password:params[:password],
-      password_confirmation:params[:password_confirmation],
-      accept_policy:params[:accept_policy],
-      gender:params[:gender],
-      role:params[:role],
-      phone_number:params[:phone_number],
-      occupation:params[:occupation],
-      avatar:params[:avatar]
-    }
+    params.permit(:name, :email, :password, :password_confirmation, :accept_policy, :gender, :role, :phone_number, :occupation, :avatar)
   end
 end
