@@ -69,4 +69,8 @@ gem 'carrierwave'
 
 gem 'cancancan'
 
+<<<<<<< HEAD
 gem 'carrierwave-base64'
+=======
+gem "dockerfile-rails", ">= 1.2", :group => :development
+>>>>>>> 0104d23 (update deploy fly.io)
