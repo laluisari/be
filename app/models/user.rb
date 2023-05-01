@@ -34,7 +34,7 @@ class User < ApplicationRecord
   #bcrypt to encrypt password
   has_secure_password
 
-  #uploader cloudinary
+  #uploader cloudinaryy
   mount_uploader :avatar, AvatarUploader
 
   #new_attributes
