@@ -75,6 +75,13 @@ class User < ApplicationRecord
     end
   end
 
+  # upload_cloudinary
+  def upload_avatar(base64_image)
+    result = Cloudinary::Uploader.upload(base64_image)
+    self.avatar = result['secure_url']
+    save
+  end
+  
   #validation for password
   def password_requirements
     rules = {
