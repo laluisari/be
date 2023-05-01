@@ -31,7 +31,8 @@ class UserMailer < ApplicationMailer
                            authentication: "plain",
                            enable_starttls_auto: true,
                            open_timeout: 5,
-                           read_timeout: 5
+                           read_timeout: 5,
+                           content_type: 'text/html'
                          }
   end
 end
