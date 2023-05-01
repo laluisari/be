@@ -69,6 +69,6 @@ gem 'carrierwave'
 
 gem 'cancancan'
 
-
 gem 'carrierwave-base64'
+
 
