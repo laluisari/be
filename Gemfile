@@ -69,4 +69,7 @@ gem 'carrierwave'
 
 gem 'cancancan'
 
-gem "dockerfile-rails", ">= 1.2", :group => :development
+gem 'carrierwave-base64'
+
+
+

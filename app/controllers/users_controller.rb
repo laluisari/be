@@ -45,6 +45,11 @@ class UsersController < ApplicationController
 
   def update
     @user.skip_password_validation = true
+
+    if params[:avatar_base64].present?
+      @user.upload_avatar(params[:avatar_base64])
+    end
+    
     if @user.update(user_params)
       render json: @user, status: :ok
     else
