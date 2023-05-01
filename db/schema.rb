@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_061948) do
     t.integer "page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "db_connection_id"
+    t.index ["db_connection_id"], name: "index_dashboards_on_db_connection_id"
   end
 
   create_table "db_connections", force: :cascade do |t|
