@@ -1,6 +1,6 @@
-# fly.toml file generated for dafbin-staging on 2023-04-10T13:19:47+07:00
+# fly.toml file generated for stg-dafbin on 2023-05-01T14:22:09+07:00
 
-app = "dafbin-staging"
+app = "stg-dafbin"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "sin"

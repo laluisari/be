@@ -68,3 +68,5 @@ gem 'cloudinary'
 gem 'carrierwave'
 
 gem 'cancancan'
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
