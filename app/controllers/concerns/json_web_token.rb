@@ -9,15 +9,15 @@ module JsonWebToken
       token = headers['Authorization'].split(' ').last
       decoded_auth_token = JsonWebToken.decode(token)
       if decoded_auth_token
-        user = User.find(decoded_auth_token[:user_id])
+        user = User.find_by_id(decoded_auth_token[:user_id])
         return user if user
       end
     end
     nil
   end
 
-  # def self.encode(payload, exp = 24.hours.from_now)
-  def self.encode(payload, exp = 1.year.from_now)
+  def self.encode(payload, exp = 24.hours.from_now)
+# def self.encode(payload, exp = 1.year.from_now)
     payload[:exp] = exp.to_i
     JWT.encode(payload, SECRET_KEY)
   end
