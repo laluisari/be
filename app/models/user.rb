@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_create :confirmation_token
+  before_save :encode_avatar
 
   #enum roles and genders
   enum role: {
@@ -75,10 +76,13 @@ class User < ApplicationRecord
   end
 
   # upload_cloudinary
-  def upload_avatar(base64_image)
-    result = Cloudinary::Uploader.upload(base64_image)
-    self.avatar = result['secure_url']
-    save
+  def encode_avatar
+    if avatar.present? && avatar_changed?
+      tempfile = avatar.queued_for_write[:original]
+      encoded_string = Base64.encode64(tempfile.read)
+      cloudinary_response = Cloudinary::Uploader.upload("data:image/png;base64,#{encoded_string}")
+      self.avatar = cloudinary_response['secure_url']
+    end
   end
   
   #validation for password
