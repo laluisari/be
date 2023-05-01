@@ -72,3 +72,4 @@ gem 'cancancan'
 gem 'carrierwave-base64'
 
 
+
