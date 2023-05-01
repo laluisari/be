@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   enum gender: {
     laki_laki: 0,
-    perempuan: 1 
+    perempuan: 1
   }
 
   #relations
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate  :password_requirements, unless: :skip_password_validation
   validates :role, presence: true
-  validates :accept_policy, presence: true
+  validates :accept_policy, presence: true, on: :create
 
   #attr_accessor
   attr_accessor :skip_password_validation
@@ -64,7 +64,7 @@ class User < ApplicationRecord
   def generate_reset_token
     self.reset_token = SecureRandom.hex(10)
     self.reset_sent_at = Time.now.utc
-    save!
+    save!(validate: false)
   end
 
   private
