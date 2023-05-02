@@ -108,10 +108,5 @@ class UsersController < ApplicationController
     params.permit(:name, :email, :password, :password_confirmation, :accept_policy, :gender, :role, :phone_number, :occupation, :avatar)
   end
 
-  def encode_avatar(avatar)
-    return nil unless avatar
-
-    User.new.encode_avatar(avatar)
-  end
 
 end
