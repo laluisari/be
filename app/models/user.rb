@@ -1,3 +1,4 @@
+
 class User < ApplicationRecord
   before_create :confirmation_token
   before_save :encode_avatar
@@ -61,7 +62,6 @@ class User < ApplicationRecord
   end
 
   #set_token
-
   def generate_reset_token
     self.reset_token = SecureRandom.hex(10)
     self.reset_sent_at = Time.now.utc
@@ -74,15 +74,6 @@ class User < ApplicationRecord
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
   end
-# upload_cloudinary
-def encode_avatar
-  if avatar.present? && avatar_changed?
-    tempfile = avatar.queued_for_write[:original]
-    encoded_string = Base64.encode64(tempfile.read)
-    cloudinary_response = Cloudinary::Uploader.upload("data:image/png;base64,#{encoded_string}")
-    self.avatar = cloudinary_response['secure_url']
-  end
-end
 
   #validation for password
   def password_requirements

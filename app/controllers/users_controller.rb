@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+
     if @user.valid?
       UserMailer.registration_confirmation(@user).deliver_now
       render json: { message: "success", data: @user.new_attributes}, status: :created
@@ -45,11 +46,6 @@ class UsersController < ApplicationController
 
   def update
     @user.skip_password_validation = true
-
-    if params[:avatar_base64].present?
-      @user.upload_avatar(params[:avatar_base64])
-    end
-    
     if @user.update(user_params)
       render json: @user, status: :ok
     else
@@ -111,4 +107,11 @@ class UsersController < ApplicationController
   def user_params 
     params.permit(:name, :email, :password, :password_confirmation, :accept_policy, :gender, :role, :phone_number, :occupation, :avatar)
   end
+
+  def encode_avatar(avatar)
+    return nil unless avatar
+
+    User.new.encode_avatar(avatar)
+  end
+
 end
