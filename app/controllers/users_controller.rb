@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password ]
+  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password]
   before_action :find_user_id, only: %i[show update destroy]
 
   def active_user
@@ -23,11 +23,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users.map(&:new_attributes), status: :ok
+    render json: { status: 200, message: "success", data: @users.map(&:new_attributes) }, status: :ok
   end
 
   def show
-    render json: { message: "success", data: @user.new_attributes }, status: :ok
+    render json: { status: 200, message: "success", data: @user.new_attributes }, status: :ok
   end
 
   def create
@@ -35,32 +35,26 @@ class UsersController < ApplicationController
 
     if @user.valid?
       UserMailer.registration_confirmation(@user).deliver_now
-      render json: { message: "success", data: @user.new_attributes}, status: :created
+      render json: { status: 200, message: "success", data: @user.new_attributes}, status: :ok
     else
-      render json: {
-               message: @user.errors.full_messages
-             },
-             status: :unprocessable_entity
+      render json: { status: 422, message: "create user failed", error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def update
     @user.skip_password_validation = true
     if @user.update(user_params)
-      render json: @user, status: :ok
+      render json: { status: 200, message: "success", data: @user.new_attributes}, status: :ok
     else
-      render json: {
-               message: @user.errors.full_messages
-             },
-             status: :unprocessable_entity
+      render json: { status: 422, message: "update user failed", error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @user.destroy
-      render json: { message: "success", data: @user }, status: :ok
+      render json: { status: 200, message: "success", data: @user.new_attributes }, status: :ok
     else
-      render json: { message: "Delete Failed" }, status: :unprocessable_entity
+      render json: { status: 422, message: "delete user failed" }, status: :unprocessable_entity
     end
   end
 
@@ -107,6 +101,5 @@ class UsersController < ApplicationController
   def user_params 
     params.permit(:name, :email, :password, :password_confirmation, :accept_policy, :gender, :role, :phone_number, :occupation, :avatar)
   end
-
 
 end
