@@ -1,7 +1,6 @@
 
 class User < ApplicationRecord
   before_create :confirmation_token
-  before_save :encode_avatar
 
   #enum roles and genders
   enum role: {
