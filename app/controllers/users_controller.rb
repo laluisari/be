@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password]
+  skip_before_action :authenticate_request, only: %i[create login confirm_email forgot_password destroy]
   before_action :find_user_id, only: %i[show update destroy]
 
   def active_user
@@ -67,9 +67,9 @@ class UsersController < ApplicationController
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
-      #tambah view untuk success_confirmation (kasih button untuk redirect ke login page)
-      render json: "Email Terverifikasi"
-      # redirect_to ...
+      # render json: "Email Terverifikasi"
+      url = "#{ENV["URL_WEB"]}/verified/#{user.confirm_token}"
+      redirect_to url, allow_other_host: true
     else
       render json: { errors: "Email gagal diverifikasi" }, status: :bad_request
     end

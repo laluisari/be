@@ -1,7 +1,6 @@
-Hi <%= @user.name %>,
+Hai <%= @user.name %>,
 
-Thanks for registering! To confirm your registration click the URL below.
-
+Terima kasih telah melakukan registrasi di Dafbin! Untuk konfirmasi, klik URL di bawah ini.
 
 
 <%= link_to "Verifikasi Email", "#{@base_url}/confirm/#{@user.confirm_token}" %>
