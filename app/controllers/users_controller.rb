@@ -43,6 +43,11 @@ class UsersController < ApplicationController
 
   def update
     @user.skip_password_validation = true
+
+    if params[:avatar_base64].present?
+      @user.upload_avatar(params[:avatar_base64])
+    end
+
     if @user.update(user_params)
       render json: { status: 200, message: "success", data: @user.new_attributes}, status: :ok
     else
@@ -98,7 +103,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_params 
+  def user_params
     params.permit(:name, :email, :password, :password_confirmation, :accept_policy, :gender, :role, :phone_number, :occupation, :avatar)
   end
 

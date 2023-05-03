@@ -19,6 +19,8 @@ class DbConnectionController < ApplicationController
   def create
     @db = DbConnection.new(db_connection_params)
     @db.user_id = @current_user.id
+    @conn = DbConnect::GetTables(@db)
+    return render json: { status: 400, message: 'Connection Failed', error: 'Please Check your Configuration' }, status: :bad_request if @conn.nil?
     return render json: { status: 422, message: 'Create Record Failed', error: @db.errors }, status: :unprocessable_entity unless @db.save
 
     render json: { status: 200, message: 'Success', data: @db.new_attr }, status: :ok
