@@ -1,7 +1,7 @@
 class Dashboard < ApplicationRecord
   has_one :notification
   has_many :user_dashboard
-  has_many :card
+  has_many :dashboard_page
   has_many :user_dashboards
   has_many :users, through: :user_dashboards
 

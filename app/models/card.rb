@@ -1,6 +1,6 @@
-class Card < ApplicationRecord
+class Card < ApplicationRecord 
 
-    belongs_to :dashboard
+    belongs_to :dashboard_page
     belongs_to :owner, class_name: "User"
     
     has_many :db_connection

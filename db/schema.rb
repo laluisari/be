@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_03_043407) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_025738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
     t.text "query"
     t.integer "visualization_type", default: 0
-    t.bigint "dashboard_id", null: false
+    t.bigint "dashboard_page_id", null: false
     t.bigint "owner_id", null: false
     t.bigint "db_connection_id", null: false
     t.json "position"
@@ -25,9 +25,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_043407) do
     t.string "card_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dashboard_id"], name: "index_cards_on_dashboard_id"
+    t.index ["dashboard_page_id"], name: "index_cards_on_dashboard_page_id"
     t.index ["db_connection_id"], name: "index_cards_on_db_connection_id"
     t.index ["owner_id"], name: "index_cards_on_owner_id"
+  end
+
+  create_table "dashboard_pages", force: :cascade do |t|
+    t.bigint "dashboard_id", null: false
+    t.integer "type_pages", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dashboard_id"], name: "index_dashboard_pages_on_dashboard_id"
   end
 
   create_table "dashboards", force: :cascade do |t|
@@ -101,9 +109,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_043407) do
     t.integer "gender"
   end
 
-  add_foreign_key "cards", "dashboards", on_delete: :cascade
+  add_foreign_key "cards", "dashboard_pages", on_delete: :cascade
   add_foreign_key "cards", "db_connections", on_delete: :cascade
   add_foreign_key "cards", "users", column: "owner_id", on_delete: :cascade
+  add_foreign_key "dashboard_pages", "dashboards", on_delete: :cascade
   add_foreign_key "orders", "users", column: "customer_id", on_delete: :cascade
   add_foreign_key "orders", "users", column: "data_expert_id", on_delete: :cascade
 end
