@@ -5,16 +5,27 @@ class GeneratesController < ApplicationController
   skip_before_action :authenticate_request
 
   def upload
-    file = params[:file] 
+    file = params[:file]
     begin
       uploader = CsvUploader.new
       uploader.store!(file)
-      render json: { message: "sucees" }
+  
+      # Simpan url file dari Cloudinary ke dalam model Generate
+      generate = Generate.new
+      generate.csv_file = uploader
+      generate.save
+  
+      # Import data dari file CSV menggunakan method import_data pada model Generate
+      generate.import_data
+  
+      render json: { message: "File uploaded and imported successfully!" }
     rescue => e
+      render json: { message: "Failed to upload and import file. Error: #{e.message} " }, status: :unprocessable_entity
     
-      render json: { message: "Failed to upload file. Error: #{e.message} " }, status: :unprocessable_entity
-    end
   end
+  
+  end
+  
 
   private
 
@@ -52,3 +63,5 @@ end
 #     render json: "berhasil", status: :ok
 #   end
 # end
+
+
