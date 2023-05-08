@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   # root "articles#index"
 
+  get "/form2", to: "generates#index"
+  post "/upload", to: "generates#upload"
+
+
   resources :db_connection
   resources :dashboards
   resources :notifications

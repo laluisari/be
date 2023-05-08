@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_025738) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_025323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_025738) do
     t.index ["dashboard_page_id"], name: "index_cards_on_dashboard_page_id"
     t.index ["db_connection_id"], name: "index_cards_on_db_connection_id"
     t.index ["owner_id"], name: "index_cards_on_owner_id"
+  end
+
+  create_table "csvfiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dashboard_pages", force: :cascade do |t|
@@ -60,6 +65,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_025738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "db_host"
+  end
+
+  create_table "generates", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|

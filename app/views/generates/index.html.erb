@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contoh Halaman Web</title>
+  </head>
+  <body>
+    <%= form_tag({action: 'upload', method: 'post', multipart: true}) do %>
+      <%= file_field_tag 'file' %>
+      <%= submit_tag 'Upload' %>
+    <% end %>
+  </body>
+</html>
+ 

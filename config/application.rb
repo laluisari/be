@@ -1,5 +1,9 @@
 require_relative "boot"
 require "rails/all"
+require 'cloudinary'
+require 'carrierwave'
+# require 'carrierwave/storage/cloudinary'
+
 Bundler.require(*Rails.groups)
 require 'dotenv/load' if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test' || ENV['RAILS_ENV'] == 'production'
 

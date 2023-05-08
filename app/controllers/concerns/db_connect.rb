@@ -48,7 +48,6 @@ module DbConnect
       conn.finish
       result
     end
-
   end
 
   def self.InitConnection(param = {})
