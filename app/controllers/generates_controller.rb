@@ -5,11 +5,11 @@ class GeneratesController < ApplicationController
   skip_before_action :authenticate_request
 
   def upload
-    file = params[:file]
+    file = params[:file] 
     begin
       uploader = CsvUploader.new
       uploader.store!(file)
-      render json: { message: "File uploaded successfully!" }
+      render json: { message: "sucees" }
     rescue => e
     
       render json: { message: "Failed to upload file. Error: #{e.message} " }, status: :unprocessable_entity
